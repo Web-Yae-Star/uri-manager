@@ -190,10 +190,16 @@ app.get('/', async (req: Request, res: Response) => {
         const base = decodeUriParameter(uriParameter);
         Logger.debug('Decoded and verified base URI', { base });
 
-        const conmutatedValue = performConmutation(base, json);
+        let conmutatedValue = performConmutation(base, json);
         Logger.debug('Conmutation result', { conmutatedValue });
 
         if (conmutatedValue) {
+            const hasAndroidView = req.query['android-view'] !== undefined;
+            if (hasAndroidView && conmutatedValue !== 'prod-raidenplayer') {
+                Logger.debug('Android view override active: redirecting embed commuter to prod-general');
+                conmutatedValue = 'prod-general';
+            }
+
             const resolvedVersion = version || (conmutatedValue.includes('snbox') || conmutatedValue.includes('ok') ? 'snbox' : 'default');
             const singleEncodedHash = Buffer.from(base).toString('base64');
             const response = '/' + conmutatedValue + '/?' + ANIYAE_HASH + '=' + singleEncodedHash;

@@ -69,6 +69,30 @@ describe('Server Routes', () => {
 
       expect(response.headers['content-type']).toContain('text/html');
     });
+
+    test('should override embed commuters to prod-general when android-view query parameter is present', async () => {
+      const validUri = 'https://filemoon.sx/e/test123';
+      const encodedUri = Buffer.from(validUri).toString('base64');
+
+      const response = await request(app)
+        .get(`/?testHash=${encodedUri}&android-view=`)
+        .expect(200);
+
+      expect(response.headers['content-type']).toContain('text/html');
+      expect(response.text).toContain('/prod-general/?testHash=');
+    });
+
+    test('should preserve native-player (prod-raidenplayer) when android-view query parameter is present', async () => {
+      const validUri = 'https://catbox.moe/file.mp4';
+      const encodedUri = Buffer.from(validUri).toString('base64');
+
+      const response = await request(app)
+        .get(`/?testHash=${encodedUri}&android-view=true`)
+        .expect(200);
+
+      expect(response.headers['content-type']).toContain('text/html');
+      expect(response.text).toContain('/prod-raidenplayer/?testHash=');
+    });
   });
 
   describe('GET /prod-general', () => {
