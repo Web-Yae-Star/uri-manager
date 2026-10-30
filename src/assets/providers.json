@@ -57,6 +57,7 @@
     { "key": "doodstream", "value": "prod-general" },
     { "key": "ds2play", "value": "prod-general" },
     { "key": "d-s.io", "value": "prod-dood-analyzer" },
+    { "key": "playmogo", "value": "prod-general" },
     { "key": "dood", "value": "prod-general" },
 
     { "key": "filemoon.sx", "value": "moon-analizer" },
