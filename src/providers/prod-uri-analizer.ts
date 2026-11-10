@@ -69,7 +69,7 @@ export const performLuluAnalyzer = (decodedUri: string) => {
         return decodedUri;
     } else {
         const lulu: domains = {
-            "https://luluvdo.com/": "https://luluvdo.com/e/"
+            "https://luluvdo.com/": "https://luluvid.com/e/"
         };
         const finded = Object.keys(lulu).find(key => decodedUri.includes(key));
         const newUri = decodedUri.replace(finded!, lulu[finded!]);
@@ -80,10 +80,10 @@ export const performLuluAnalyzer = (decodedUri: string) => {
 export const performLulustAnalyzer = (decodedUri: string) => {
     if (decodedUri.includes(".st") || decodedUri.includes(".com") || decodedUri.includes("luluvdoo.com")) {
         const lulust: domains = {
-            "lulu.st": "luluvdo.com",
-            "lulustream.com": "luluvdo.com",
-            "luluvdoo.com": "luluvdo.com",
-            "luluvid.com": "luluvdo.com",
+            "lulu.st": "luluvid.com",
+            "lulustream.com": "luluvid.com",
+            "luluvdoo.com": "luluvid.com",
+            "luluvdo.com": "luluvid.com",
         };
         const finded = Object.keys(lulust).find(key => decodedUri.includes(key));
         const newUri = decodedUri.replace(finded!, lulust[finded!]);
@@ -243,4 +243,4 @@ export const decodeUriParameter = (uriParameter: string): string => {
     } catch {
         return sanitizeDomainTld(uriParameter);
     }
-};
+};
