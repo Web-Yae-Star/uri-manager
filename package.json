@@ -1,6 +1,6 @@
 {
   "name": "raiden-embed-view",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "main": "dist/embed-serv.js",
   "scripts": {
     "dev": "bun --watch src/embed-serv.ts",
